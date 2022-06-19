@@ -26,8 +26,8 @@ LOAD DATA LOCAL INPATH 'data.tsv' OVERWRITE INTO TABLE Text;
 
 CREATE TABLE Result 
     AS 
-        SELECT letter, calendar, value FROM Text 
-            Order by letter,value;
+        SELECT * FROM Text 
+            Order by letter,value,calendar;
 
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
