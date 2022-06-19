@@ -27,9 +27,9 @@ LOAD DATA LOCAL INPATH 'data.tsv' OVERWRITE INTO TABLE Text;
 
 CREATE TABLE Result 
     AS 
-        SELECT value FROM Text 
-            Order desc value
-	    Limit 5;
+        SELECT DISTINCT value FROM Text 
+            ORDER BY value ASC
+	    LIMIT 5;
 
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
