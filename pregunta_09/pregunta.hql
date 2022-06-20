@@ -45,12 +45,10 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-DROP TABLE IF EXISTS Result;
-CREATE TABLE Result 
-AS
-SELECT a.c1,a.c2,b.c4[a.c2] FROM tbl0 a, tbl1 b 
-    WHERE a.c1=b.c1; 
-
 INSERT OVERWRITE LOCAL DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT * FROM answer;
+STORED AS TEXTFILE
+SELECT tbl0.c1, 
+       tbl0.c2, 
+       tbl1.c4[tbl0.c2] 
+    FROM tbl0 JOIN tbl1 ON tbl0.c1 = tbl1.c1;
