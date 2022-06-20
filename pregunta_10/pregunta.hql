@@ -29,4 +29,13 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-
+DROP TABLE IF EXISTS Result;
+CREATE TABLE Result 
+AS
+SELECT key, SUM(value)
+FROM tbl0 LATERAL VIEW explode(c3) adTable AS key,value
+GROUP BY key
+;
+INSERT OVERWRITE LOCAL DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM Result;
