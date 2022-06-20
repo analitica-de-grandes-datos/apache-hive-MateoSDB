@@ -45,4 +45,11 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+DROP TABLE IF EXISTS Result;
+CREATE TABLE Result 
+AS
+SELECT a.c1,a.c2,b.c4[a.c2] FROM tbl0 a, tbl1 b; 
 
+INSERT OVERWRITE LOCAL DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM answer;
