@@ -45,4 +45,12 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+DROP TABLE IF EXISTS Result;
+CREATE TABLE Result 
+    AS
+SELECT c2,c1 FROM tbl0;
 
+INSERT OVERWRITE DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT c2, CONCAT_WS(':',COLLECT_SET(c1)) FROM Result
+GROUP BY c2;
