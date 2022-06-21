@@ -39,8 +39,8 @@ STORED AS TEXTFILE
 SELECT c2, key, count(key)
 FROM t0
  LATERAL VIEW
- EXPLODE(c2) t0 As c2
+ EXPLODE(c2) t0 AS c2
  LATERAL VIEW
  EXPLODE(c3) t0 AS key, value
- GROUP BY c2, key
- ORDER BY c2,key; 
+GROUP BY c2, key
+ORDER BY c2, key; 
